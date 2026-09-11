@@ -1,0 +1,14 @@
+# Personal writing and local-only working files
+/writing-projects/
+/local/
+/.private/
+.env
+.env.*
+*.pem
+*.key
+
+# Generated files
+__pycache__/
+*.py[cod]
+.DS_Store
+.venv/

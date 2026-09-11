@@ -1,0 +1,4 @@
+interface:
+  display_name: "Comedy Writer"
+  short_description: "Develop premises, bits, and connected routines"
+  default_prompt: "Use $comedy-writer to turn my observation into a short English bit in my own voice."
