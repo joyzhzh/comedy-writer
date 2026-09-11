@@ -1,4 +1,4 @@
-# Shared writing workflow · 0.1.0
+# Shared writing workflow · 0.2.0
 
 ## Read the room and the writer
 
@@ -40,8 +40,10 @@ options include literal interpretation, a specific comparison, self-implication,
 escalation, and a changed point of view. Use whichever fits; do not force a
 setup/punch template or a fixed number of tags onto every line.
 
-Keep tags only when they add a new beat. Avoid explaining the joke after its
-landing. For a requested duration, give an approximate length and a word count
+Try tags that add a beat, build a pattern, or serve the intended rhythm. Cut an
+explanation when it merely restates a landing; keep it when it creates another
+turn or supplies necessary context. These are editing choices, not definitions
+of successful comedy. For a requested duration, give an approximate length and a word count
 using the language edition's disclosed planning assumption. Allow space for pauses
 and reactions; actual timing needs a read-aloud.
 
@@ -72,8 +74,10 @@ a closer that pays off the through-line. Order beats so each adds something.
 
 Write actual transitions, not just an outline with numbered jokes. Check for
 contradictory facts, repeated explanations, and resets that lose the audience.
-Use a callback only when its first occurrence is established and the return
-changes its meaning or stakes. Omit forced callbacks. Do not add a new personal
+In this skill, a callback refers back to an established earlier beat after
+intervening material. Recognition, continuity, or a new meaning or consequence
+can motivate the return. Use it when it serves the writer's aim; omit it when it
+feels forced. This is broader than a repeated-punchline definition. Do not add a new personal
 incident merely to connect two bits. Supply a readable script; a short beat map
 may follow when helpful.
 

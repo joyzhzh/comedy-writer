@@ -32,6 +32,13 @@ Prepare this JSON in a new input file, or send it on standard input with `--inpu
 
 Valid stages: `input`, `premises`, `draft`, `revision`, `routine`. Add useful brief
 fields such as audience, duration, exact voice sample, or approved inventions.
+When useful, preserve editable `brief.source_notes` from
+[topical writing](topical-material.md) and `brief.routine_plan` from
+[beat planning](routine-planning.md). These are optional JSON conventions: the
+helper retains them without verifying facts, links, permissions, or dependencies.
+They do not introduce a transcript importer or a new snapshot schema. Old 0.1.0
+snapshots remain readable; recovering one appends a 0.2.0 snapshot and leaves the
+old file and its version metadata intact.
 Keep unknown facts unknown. Preserve the user's original material verbatim in an
 `input` snapshot before saving a rewrite. Separate feedback kinds in the list:
 `writer`, `audience-reported`, `self-review`, or `simulated`. Only use `writer` for
@@ -55,7 +62,8 @@ snapshot, not a delta. To recover an earlier draft, show its material. To make
 it the latest again, save that old JSON with `--input`; this creates another
 revision and records `copied_from`. To develop a deliberate branch, add
 `--parent 0001` while saving a new input. Existing versions remain intact.
-`latest` means the highest numbered completed save, not a quality judgment.
+`latest` selects the highest numbered file and validates it before use. A partial
+or invalid latest file raises an error rather than silently choosing an older one.
 Check the saved parent when continuing branches.
 
 Do not edit old snapshots, user input files, or competing candidates in place.

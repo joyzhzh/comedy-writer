@@ -68,6 +68,54 @@ def main():
     assert len(run("list", project).splitlines()) == 5
     checks.append("Explicit branch parent, listing, and latest selection work")
 
+    # Exercise the new optional context through the same public CLI used by saves.
+    extended_project = project / "optional-context"
+    extended_brief = dict(original["brief"], source_notes=[{
+        "id": "n1", "claim": "A bench booking policy was mentioned without a source.",
+        "basis": "unverified", "limits": ["No policy document inspected"],
+        "comic_angle": "A hypothetical appointment to sit down",
+    }], routine_plan={
+        "through_line": "Making rest into work", "beats": [
+            {"id": "b1", "purpose": "Introduce hypothetical booking", "needs": []},
+            {"id": "b2", "purpose": "Return to booking", "needs": ["b1"]},
+        ], "order": ["b1", "b2"], "open_questions": ["Keep the return?"],
+    })
+    extended = dict(original, brief=extended_brief)
+    extended_path = Path(run("save", extended_project, "--input", "-", data=extended).strip())
+    extended_bytes = extended_path.read_bytes()
+    shown = json.loads(run("show", extended_project))
+    assert shown["brief"] == extended_brief
+    branch_path = Path(run("save", extended_project, "--input", extended_path,
+                           "--parent", "0001").strip())
+    assert json.loads(branch_path.read_text())["brief"] == extended_brief
+    assert extended_path.read_bytes() == extended_bytes
+    checks.append("Optional source notes and routine context survive show and branch unchanged")
+
+    # A real schema-1 layout from the previous version, not written by the new helper.
+    legacy_project = project / "legacy"
+    legacy_folder = legacy_project / "versions"
+    legacy_folder.mkdir(parents=True)
+    legacy = dict(original, _snapshot={
+        "schema": 1, "revision": "0001", "parent": None, "copied_from": None,
+        "created_utc": "2026-09-01T00:00:00+00:00",
+        "core_version": "0.1.0", "english_version": "0.1.0",
+    })
+    legacy_path = legacy_folder / "0001.json"
+    legacy_path.write_text(json.dumps(legacy, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    legacy_bytes = legacy_path.read_bytes()
+    assert json.loads(run("show", legacy_project)) == legacy
+    restored_path = Path(run("save", legacy_project, "--input", legacy_path).strip())
+    restored = json.loads(restored_path.read_text())
+    assert restored["material"] == legacy["material"]
+    assert restored["brief"] == legacy["brief"]
+    assert restored["_snapshot"]["schema"] == 1
+    assert restored["_snapshot"]["copied_from"] == "0001"
+    assert restored["_snapshot"]["parent"] == "0001"
+    assert restored["_snapshot"]["core_version"] == "0.2.0"
+    assert restored["_snapshot"]["english_version"] == "0.2.0"
+    assert legacy_path.read_bytes() == legacy_bytes
+    checks.append("A 0.1.0 snapshot reads exactly and recovers as 0.2.0 without changing the old file")
+
     before = {p.name: p.read_bytes() for p in (project / "versions").iterdir()}
     run("save", project, "--input", "-", data={"material": "invalid"}, ok=False)
     run("save", project, "--input", "-", "--parent", "9999", data=original, ok=False)

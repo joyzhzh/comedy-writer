@@ -10,12 +10,16 @@ Python 3.9+ is sufficient; there are no third-party test dependencies. The test
 creates a temporary project, keeps its files available for inspection, and prints
 the resulting folder. Do not commit that machine-specific output.
 
-The seven checks cover exact original material and brief preservation; new
+The nine checks cover exact original material and brief preservation; new
 versions without overwriting the original; feedback readback; recovery as a new
 version; explicit branch parents and latest selection; rejection of malformed
-requests without changing files; and retention of an interrupted latest file.
+requests without changing files; retention of an interrupted latest file;
+unchanged optional source notes and routine context through show and branch;
+and exact reading/recovery of a 0.1.0 snapshot as a new 0.2.0 version without
+changing the original file. Snapshot schema 1 is retained.
 
-The writing example is an author demonstration. It is not a comparison against
+The [writing example](EXAMPLE.md) and [0.2.0 scenarios](UPGRADE_EXAMPLES.md) are
+author demonstrations. They are not comparisons against
 a baseline, an independent review, or evidence of improved audience response.
 Funniness, voice fit, global originality, and performance timing remain matters
 for actual use and feedback. Chinese behavior is not validated by this package.
@@ -24,3 +28,8 @@ The skill's YAML frontmatter and UI metadata have been checked with the local
 skill-creator validator and a YAML parser. The helper is tested separately from
 the model's creative judgment. Automatic skill selection can depend on the host;
 explicitly loading SKILL.md provides a direct invocation route.
+
+The release also checks local Markdown targets, version consistency, and the
+public file set for private paths or identifiers. These are packaging checks,
+not behavioral proof. Source availability and third-party permissions can change;
+no API integration, transcript acquisition, or independent audience test was run.

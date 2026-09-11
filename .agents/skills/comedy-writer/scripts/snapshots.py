@@ -94,8 +94,8 @@ def save(project, input_name, parent):
             "parent": parent_path.stem if parent_path else None,
             "copied_from": old_meta.get("revision"),
             "created_utc": datetime.now(timezone.utc).isoformat(),
-            "core_version": "0.1.0",
-            "english_version": "0.1.0",
+            "core_version": "0.2.0",
+            "english_version": "0.2.0",
         }
         payload = json.dumps(data, ensure_ascii=False, indent=2, allow_nan=False) + "\n"
         try:
